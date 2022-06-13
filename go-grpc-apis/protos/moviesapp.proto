@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "moviesapp.com/grpc/protos";
+
+package moviesapp;
+
+service Movie{
+    rpc GetMovies (Empty) returns (stream MovieInfo);
+    rpc GetMovie (Id) returns (MovieInfo);
+    rpc CreateMovie (MovieInfo) returns (Id);
+}
+
+message Empty{}
+
+// 1, 2, 3 are not values but aliases
+message MovieInfo {
+    string id = 1;
+    string isbn = 2;
+    string title = 3;
+    Director director = 4;
+}
+
+message Director {
+    string firstname = 1;
+    string lastname = 2;
+}
+
+message Id{
+    string value = 1;
+}
